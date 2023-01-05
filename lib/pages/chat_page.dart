@@ -25,14 +25,15 @@ class ChatPage extends StatelessWidget {
             items: [
               DropdownMenuItem(
                 value: 'logout',
-                child: Container(
-                  child: Row(
-                    children: [
-                      Icon(Icons.exit_to_app, color: Colors.black87,),
-                      SizedBox(width: 10),
-                      Text("sair"),
-                    ],
-                  ),
+                child: Row(
+                  children: const [
+                    Icon(
+                      Icons.exit_to_app,
+                      color: Colors.black87,
+                    ),
+                    SizedBox(width: 10),
+                    Text("sair"),
+                  ],
                 ),
               ),
             ],

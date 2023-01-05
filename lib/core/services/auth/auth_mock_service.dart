@@ -10,9 +10,9 @@ class AuthMockService implements AuthService {
     _defaultUser.email: _defaultUser,
   };
   static final _defaultUser = ChatUser(
-    id: '1',
-    name: 'Teste',
-    email: "teste@cod3r.com.br",
+    id: '456',
+    name: 'Alice',
+    email: "alice@cod3r.com.br",
     imageUrl: 'assets/images/avatar.png',
   );
   static ChatUser? _currentUser;
