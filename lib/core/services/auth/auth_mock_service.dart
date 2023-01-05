@@ -6,7 +6,7 @@ import 'package:chat/core/models/chat_user.dart';
 import 'package:chat/core/services/auth/auth_service.dart';
 
 class AuthMockService implements AuthService {
-  static Map<String, ChatUser> _users = {
+  static final Map<String, ChatUser> _users = {
     _defaultUser.email: _defaultUser,
   };
   static final _defaultUser = ChatUser(
