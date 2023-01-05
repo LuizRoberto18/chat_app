@@ -1,7 +1,14 @@
+import 'dart:math';
+
 import 'package:chat/components/messages.dart';
 import 'package:chat/components/new_message.dart';
+import 'package:chat/core/models/chat_notification.dart';
 import 'package:chat/core/services/auth/auth_service.dart';
+import 'package:chat/pages/notification_page.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../core/services/notification/push_notification_service.dart';
 
 class ChatPage extends StatelessWidget {
   const ChatPage({Key? key}) : super(key: key);
@@ -12,28 +19,58 @@ class ChatPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Cod3r Chat"),
         actions: [
-          DropdownButton(
-            icon: Icon(
-              Icons.more_vert,
-              color: Theme.of(context).primaryIconTheme.color,
+          DropdownButtonHideUnderline(
+            child: DropdownButton(
+              icon: Icon(
+                Icons.more_vert,
+                color: Theme.of(context).primaryIconTheme.color,
+              ),
+              onChanged: (value) {
+                if (value == 'logout') {
+                  AuthService().logout();
+                }
+              },
+              items: [
+                DropdownMenuItem(
+                  value: 'logout',
+                  child: Row(
+                    children: const [
+                      Icon(
+                        Icons.exit_to_app,
+                        color: Colors.black87,
+                      ),
+                      SizedBox(width: 10),
+                      Text("sair"),
+                    ],
+                  ),
+                ),
+              ],
             ),
-            onChanged: (value) {
-              if (value == 'logout') {
-                AuthService().logout();
-              }
-            },
-            items: [
-              DropdownMenuItem(
-                value: 'logout',
-                child: Row(
-                  children: const [
-                    Icon(
-                      Icons.exit_to_app,
-                      color: Colors.black87,
+          ),
+          Stack(
+            children: [
+              IconButton(
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return const NotificationPage();
+                      },
                     ),
-                    SizedBox(width: 10),
-                    Text("sair"),
-                  ],
+                  );
+                },
+                icon: const Icon(Icons.notifications),
+              ),
+              Positioned(
+                top: 5,
+                right: 5,
+                child: CircleAvatar(
+                  maxRadius: 10,
+                  backgroundColor: Colors.red.shade800,
+                  child: Text(
+                    "${Provider.of<ChatNotificationService>(context).itemsCount}",
+                    style: const TextStyle(fontSize: 12, color: Colors.white),
+                  ),
                 ),
               ),
             ],
@@ -48,6 +85,17 @@ class ChatPage extends StatelessWidget {
           ],
         ),
       ),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () {
+      //     Provider.of<ChatNotificationService>(context, listen: false).add(
+      //       ChatNotification(
+      //         title: "Mais uma notificação",
+      //         body: Random().nextDouble().toString(),
+      //       ),
+      //     );
+      //   },
+      //   child: const Icon(Icons.add),
+      // ),
     );
   }
 }

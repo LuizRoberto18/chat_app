@@ -26,22 +26,29 @@ class _NewMessagesState extends State<NewMessages> {
     return Row(
       children: [
         Expanded(
-          child: TextField(
-            controller: _messagController,
-            onChanged: (msg) => setState(() => _message = msg),
-            onSubmitted: (_) {
-              if(_message.trim().isNotEmpty){
-                _sendMessage();
-              }
-            },
-            decoration: const InputDecoration(
-              labelText: "Enviar mensagem...",
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextField(
+              controller: _messagController,
+              onChanged: (msg) => setState(() => _message = msg),
+              onSubmitted: (_) {
+                if (_message.trim().isNotEmpty) {
+                  _sendMessage();
+                }
+              },
+              decoration: const InputDecoration(
+                labelText: "Enviar mensagem...",
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(20)),
+                ),
+              ),
+
             ),
           ),
         ),
         IconButton(
           onPressed: _message.trim().isEmpty ? null : _sendMessage,
-          icon: const Icon(Icons.send),
+          icon:  Icon(Icons.send, color: _message.trim().isEmpty ? Colors.grey : Theme.of(context).colorScheme.primary,),
         ),
       ],
     );

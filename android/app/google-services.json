@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "418187756894",
+    "project_id": "chat-3596c",
+    "storage_bucket": "chat-3596c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:418187756894:android:72ba4801debda73bda7bcf",
+        "android_client_info": {
+          "package_name": "br.com.fake.chat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "418187756894-sqktj6dau8bajrsm4mqdv3dmha4nmku6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB0pO_eeerPhbFztC54iHLdh7-rhIP-Bts"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "418187756894-sqktj6dau8bajrsm4mqdv3dmha4nmku6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
