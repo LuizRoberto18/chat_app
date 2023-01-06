@@ -1,7 +1,7 @@
 class ChatMessage {
   final String id;
   final String text;
-  final DateTime createAr;
+  final DateTime createdAt;
 
   final String userId;
   final String userName;
@@ -10,7 +10,7 @@ class ChatMessage {
   const ChatMessage({
     required this.id,
     required this.text,
-    required this.createAr,
+    required this.createdAt,
     required this.userId,
     required this.userName,
     required this.userImageUrl,

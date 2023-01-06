@@ -1,10 +1,10 @@
-import 'package:chat/core/services/auth/auth_service.dart';
-import 'package:chat/pages/auth_page.dart';
-import 'package:chat/pages/chat_page.dart';
-import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/material.dart';
 
 import '../core/models/chat_user.dart';
+import '../core/services/auth/auth_service.dart';
+import 'auth_page.dart';
+import 'chat_page.dart';
 import 'loading_page.dart';
 
 class AuthOrAppPage extends StatelessWidget {
@@ -18,13 +18,13 @@ class AuthOrAppPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return FutureBuilder(
       future: init(context),
-      builder: (context, AsyncSnapshot snapshot) {
+      builder: (ctx, AsyncSnapshot snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const LoadingPage();
         } else {
           return StreamBuilder<ChatUser?>(
             stream: AuthService().userChanges,
-            builder: (context, AsyncSnapshot snapshot) {
+            builder: (ctx, AsyncSnapshot snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return const LoadingPage();
               } else {

@@ -23,7 +23,7 @@ class ChatMockService implements ChatService {
     final newMessage = ChatMessage(
       id: Random().nextDouble().toString(),
       text: text,
-      createAr: DateTime.now(),
+      createdAt: DateTime.now(),
       userId: user.id,
       userName: user.name,
       userImageUrl: user.imageUrl,

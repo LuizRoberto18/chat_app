@@ -16,7 +16,8 @@ class _NewMessagesState extends State<NewMessages> {
   Future<void> _sendMessage() async {
     final user = AuthService().currentUser;
     if (user != null) {
-      await ChatService().save(_message, user);
+      final msg = await ChatService().save(_message, user);
+      print(msg?.id);
       _messagController.clear();
     }
   }
@@ -42,13 +43,15 @@ class _NewMessagesState extends State<NewMessages> {
                   borderRadius: BorderRadius.all(Radius.circular(20)),
                 ),
               ),
-
             ),
           ),
         ),
         IconButton(
           onPressed: _message.trim().isEmpty ? null : _sendMessage,
-          icon:  Icon(Icons.send, color: _message.trim().isEmpty ? Colors.grey : Theme.of(context).colorScheme.primary,),
+          icon: Icon(
+            Icons.send,
+            color: _message.trim().isEmpty ? Colors.grey : Theme.of(context).colorScheme.primary,
+          ),
         ),
       ],
     );
