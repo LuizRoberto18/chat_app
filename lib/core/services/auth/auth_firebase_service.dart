@@ -93,8 +93,7 @@ class AuthFirebaseService implements AuthService {
   // }
 
   @override
-  Future<void> signup(
-      String name, String email, String password, File? image) async {
+  Future<void> signup(String name, String email, String password, File? image) async {
     final signup = await Firebase.initializeApp(
       name: 'userSignup',
       options: Firebase.app().options,
@@ -117,16 +116,17 @@ class AuthFirebaseService implements AuthService {
       await credential.user?.updatePhotoURL(imageUrl);
 
       // 2.5 fazer o login do usuário
-      await login(email, password);
+     // await login(email, password);
 
       // 3. salvar usuário no banco de dados (opcional)
-      _currentUser = _toChatUser(credential.user!, imageUrl);
-     // _currentUser = _toChatUser();
+      _currentUser = _toChatUser(credential.user!, name, imageUrl);
+      // _currentUser = _toChatUser();
       await _saveChatUser(_currentUser!);
     }
 
     await signup.delete();
   }
+
   Future<String?> _uploadUserImage(File? image, String imageName) async {
     if (image == null) return "assets/images/avatar.png";
     final storage = FirebaseStorage.instance;
@@ -146,10 +146,10 @@ class AuthFirebaseService implements AuthService {
     });
   }
 
-  static ChatUser _toChatUser(User user, [String? imageUrl]) {
+  static ChatUser _toChatUser(User user, [String? name, String? imageUrl]) {
     return ChatUser(
       id: user.uid,
-      name: user.displayName ?? user.email!.split('@')[0],
+      name: name ?? user.displayName ?? user.email!.split('@')[0],
       email: user.email!,
       imageUrl: imageUrl ?? user.photoURL ?? 'assets/images/avatar.png',
     );
